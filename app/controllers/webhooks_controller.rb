@@ -1,4 +1,6 @@
 class WebhooksController < ApplicationController
+  protect_from_forgery unless: -> { request.format.json? }
+
   def keyboard
     render json: { type: "text" }
   end
