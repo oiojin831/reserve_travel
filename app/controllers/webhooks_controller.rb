@@ -6,7 +6,14 @@ class WebhooksController < ApplicationController
   end
 
   def message
-    @content = params[:content]
-    render json: { message: { text: @content } }
+    result = ""
+    if params[:content] == "예약"
+      @time_slot = TimeSlot.first
+      @time_slot.reserve
+      result = "예약되엇습니다."
+    else
+      result = "모라고?"
+    end
+    render json: { message: { text: result } }
   end
 end
